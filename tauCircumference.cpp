@@ -6,22 +6,41 @@
 //     with dimensions inputted from user
 
 #include <iostream>
+#include <random>
+#include <string>
 
 int main() {
-    // I calculate circumference of a circle
-    const double TAU = 6.28;
-    int radius;
-    double circumference;
+    // this function is a guessing game
+    std::string numberAsString;
+    int numberFromUser;
+    int randomNumber;
+    int loopCounter = 0;
 
     // input
-    std::cout << "Enter radius of the circle in mm: ";
-    std::cin >> radius;
+    std::random_device rseed;
+    std::mt19937 rgen(rseed());
+    std::uniform_int_distribution<int> idist(0, 9);
+    randomNumber = idist(rgen);
 
-    // process
-    circumference = TAU*radius;
-
-    // output
-    std::cout << "" << std::endl;
-    std::cout << "Circumference is " << circumference << " mm" << std::endl;
+    // process & output
+    while (true) {
+        std::cout << "Enter a number between 0-9: ";
+        std::cin >> numberAsString;
+        try {
+            numberFromUser = std::stoi(numberAsString);
+            loopCounter = loopCounter + 1;
+            if (numberFromUser == randomNumber) {
+                std::cout << "You got it in " << loopCounter <<
+                " tries" << std::endl;
+                break;
+            } else if (randomNumber > numberFromUser) {
+                std::cout << "Too low!" << std::endl;
+            } else if (randomNumber < numberFromUser) {
+                std::cout << "Too high!" << std::endl;
+            }
+        } catch (std::invalid_argument) {
+            std::cout << "Please enter an integer" << std::endl;
+        }
+    }
     std::cout << "\nDone." << std::endl;
 }
