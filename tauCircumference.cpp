@@ -11,10 +11,10 @@
 
 int main() {
     // this function is a guessing game
-    std::string numberAsString;
-    int numberFromUser;
+    std::string strNumber;
+    int intNumber;
     int randomNumber;
-    int loopCounter = 0;
+    int counter1 = 0;
 
     // input
     std::random_device rseed;
@@ -25,17 +25,17 @@ int main() {
     // process & output
     while (true) {
         std::cout << "Enter a number between 0-9: ";
-        std::cin >> numberAsString;
+        std::cin >> strNumber;
         try {
-            numberFromUser = std::stoi(numberAsString);
-            loopCounter = loopCounter + 1;
-            if (numberFromUser == randomNumber) {
-                std::cout << "You got it in " << loopCounter <<
+            intNumber = std::stoi(strNumber);
+            counter1 = counter1 + 1;
+            if (intNumber == randomNumber) {
+                std::cout << "You got it in " << counter1 <<
                 " tries" << std::endl;
                 break;
-            } else if (randomNumber > numberFromUser) {
+            } else if (randomNumber > intNumber) {
                 std::cout << "Too low!" << std::endl;
-            } else if (randomNumber < numberFromUser) {
+            } else if (randomNumber < intNumber) {
                 std::cout << "Too high!" << std::endl;
             }
         } catch (std::invalid_argument) {
